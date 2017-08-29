@@ -13,24 +13,33 @@ cardGame.key = '6cc621452cadd6d6f867f4435723803f';
 
 cardGame.getContent = () => {
     $.ajax({
-        url: `http://api.petfinder.com/pet.find?format=json&key=${cardGame.key}&callback=?`,
+        url: `http://api.petfinder.com/pet.find`,
         method: 'GET',
         dataType: 'jsonp',
         data: {
             key: cardGame.key,
             location: 'Toronto, On',
             animal: 'dog',
-            format: 'json'
+            format: 'json',
+            callback: "?"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         console.log(res.petfinder.pets.pet);
     });
 }
-cardGame.displayContent = () => {
-
-}
 
 cardGame.events = () => {
+    $('.startBtn').on('click', () => {
+        console.log('hi')
+        return swal({
+            title: "Sweet!",
+            text: "Here's a custom image.",
+            imageUrl: "images/thumbs-up.jpg"
+        });
+    });
+}
+
+cardGame.displayContent = () => {
 
 }
 
