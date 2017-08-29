@@ -1,3 +1,4 @@
-prepros-6.config
-styles/styles.css
-styles/styles.css.map
+node_modules/
+public/styles/style.css
+public/scripts/main.js
+.DS_Store
