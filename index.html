@@ -9,17 +9,17 @@
 </head>
 
 <body>
-    <header>
+    <header id="landingPage">
         <div class="headerContent">
             <h1>Parapug</h1>
-            <button class="startBtn">Lets Start</button>
+            <button class="startBtn"><a href="#intro">Lets Start</a></button>
         </div>
     </header>
-    <section class="intro">
+    <section class="intro" id="intro">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos architecto quaerat omnis minus excepturi ut praesentium, soluta laudantium perspiciatis inventore? Ea assumenda tempore natus ducimus ipsum laudantium officiis, enim voluptas.</p>
-        <button class="closeBtn">Begin!</button>
+        <button class="closeBtn"><a href="#game">Begin!</a></button>
     </section>
-    <main>
+    <main id="game">
         <div class="tracker">
             <div class="time">
                 <h3>Time</h3>
@@ -111,22 +111,24 @@
                 <div class="rScore__score"></div>
             </div>
         </div>
-        <button class="pAgain">Play Again</button>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hi! I just completed Parapug the game, give it a try!" data-url="http://www.parapug.com" data-show-count="false">Tweet</a>
+        <button class="pAgain"><a href="#landingPage">Play Again</a></button>
     </section>
     <footer>
         <div class="creators">
             <ul>
-                <li>Anson</li>
-                <li>Cody</li>
-                <li>Jocelyn</li>
+                <li><a href="https://github.com/Incendie">Anson</a></li>
+                <li><a href="https://github.com/cchoi94">Cody</a></li>
+                <li><a href="https://github.com/JoceLum">Jocelyn</a></li>
             </ul>
         </div>
         <div class="powerBy">
-            <p>Powered By: Petfinder API</p>
+            <p><a href="https://petfinder.com">Powered By: Petfinder API</a></p>
             <div class="footerImg"></div>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="public/scripts/scripts.js"></script>
 </body>
 
