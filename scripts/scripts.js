@@ -1,4 +1,5 @@
 var cardGame = {};
+cardGame.key = '6cc621452cadd6d6f867f4435723803f';
 
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
@@ -10,12 +11,36 @@ var cardGame = {};
 // 		4. Once the # of matches = 8, then the timer stops and the game is over.
 // 		5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
 
-cardGame.init = () => {
+cardGame.getContent = () => {
+    $.ajax({
+        url: `http://api.petfinder.com/pet.find?format=json&key=${cardGame.key}&callback=?`,
+        method: 'GET',
+        dataType: 'jsonp',
+        data: {
+            key: cardGame.key,
+            location: 'Toronto, On',
+            animal: 'dog',
+            format: 'json'
+        }
+    }).then(function(res) {
+        console.log(res.petfinder.pets.pet);
+    });
+}
+cardGame.displayContent = () => {
 
+}
+
+cardGame.events = () => {
+
+}
+
+cardGame.init = () => {
+    cardGame.events();
+    cardGame.getContent();
 };
 
 $(() => {
-	cardGame.init();
+    cardGame.init();
 });
 
 //----------------B O N U S--------------------
