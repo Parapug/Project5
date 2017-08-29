@@ -45,7 +45,7 @@ gulp.task("scripts", () => {
 //task to watch other tasks
 gulp.task('watch', () => {
   gulp.watch('./dev/styles/**/*.scss', ['styles']);
-  gulp.watch('./dev/scripts/main.js', ['scripts']);
+  gulp.watch('./dev/scripts/*.js', ['scripts']);
   gulp.watch('*.html', reload);
 });
 
