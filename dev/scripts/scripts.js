@@ -62,6 +62,8 @@ cardGame.events = () => {
 
 cardGame.matchGame = () => {
 $('.card').on('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         let c = e.currentTarget.classList;
         if (c.contains('flipped') === true) {
             c.remove('flipped');
@@ -78,9 +80,9 @@ cardGame.displayContent = () => {
         let picsToUse = cardGame.randPics;
         let classNum = randClass.toString();
         let className = `dogPics${randClass}`;
-
-        $(el).append(`<img src=${picsToUse.splice(Math.floor(Math.random()*picsToUse.length),1)}>`);
-        console.log(picsToUse);
+        let randPic = Math.floor(Math.random()*picsToUse.length);
+        let picString = picsToUse.splice(randPic,1);
+        $(el).attr('style', `background-image: url(${picString[0]})`);
         $(el).addClass(className);
     });   
 }
