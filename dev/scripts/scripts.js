@@ -1,5 +1,7 @@
 var cardGame = {};
 cardGame.key = '6cc621452cadd6d6f867f4435723803f';
+cardGame.dogPics = [];
+cardGame.randPics = [];
 
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
@@ -25,17 +27,36 @@ cardGame.getContent = () => {
         }
     }).then(function (res) {
         console.log(res.petfinder.pets.pet);
+        let petData = res.petfinder.pets.pet;
+
+        petData.forEach((dog)=>{
+            cardGame.dogPics.push(dog.media.photos.photo[2]["$t"]);
+        });
+
+        for (let i=0; i<8; i++){
+            let randomPick = Math.floor(Math.random()*cardGame.dogPics.length);
+            cardGame.randPics.forEach( (pic)=> {
+                while(cardGame.dogPics[randomPick] === pic) {
+                    randomPick = Math.floor(Math.random()*cardGame.dogPics.length);
+                }
+            });
+            cardGame.randPics.push(cardGame.dogPics[randomPick]);
+            cardGame.randPics.push(cardGame.dogPics[randomPick]);
+        }
+
+        cardGame.displayContent();
     });
 }
 
 cardGame.events = () => {
     $('.startBtn').on('click', () => {
-        console.log('hi')
-        return swal({
+        swal({
             title: "Sweet!",
             text: "Here's a custom image.",
             imageUrl: "images/thumbs-up.jpg"
-        });
+        }, ()=>{
+            cardGame.getContent();
+        });   
     });
 }
 
@@ -51,12 +72,21 @@ $('.card').on('click', (e) => {
 }
 
 cardGame.displayContent = () => {
-    
+    $('.card__front').each( (i,el)=>{
+        $(el).empty();
+        let randClass = Math.floor(Math.random()*cardGame.randPics.length);
+        let picsToUse = cardGame.randPics;
+        let classNum = randClass.toString();
+        let className = `dogPics${randClass}`;
+
+        $(el).append(`<img src=${picsToUse.splice(Math.floor(Math.random()*picsToUse.length),1)}>`);
+        console.log(picsToUse);
+        $(el).addClass(className);
+    });   
 }
 
 cardGame.init = () => {
     cardGame.events();
-    cardGame.getContent();
     cardGame.matchGame();
 };
 
