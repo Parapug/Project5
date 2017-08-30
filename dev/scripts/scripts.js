@@ -51,7 +51,7 @@ $('.card').on('click', (e) => {
 }
 
 cardGame.displayContent = () => {
-
+    
 }
 
 cardGame.init = () => {
@@ -60,7 +60,7 @@ cardGame.init = () => {
     cardGame.matchGame();
 };
 
-$(() => {
+$(() =>{
     cardGame.init();
 });
 
