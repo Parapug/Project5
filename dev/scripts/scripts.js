@@ -39,6 +39,17 @@ cardGame.events = () => {
     });
 }
 
+cardGame.matchGame = () => {
+$('.card').on('click', (e) => {
+        let c = e.currentTarget.classList;
+        if (c.contains('flipped') === true) {
+            c.remove('flipped');
+        }  else {
+            c.add('flipped');
+        }
+    });
+}
+
 cardGame.displayContent = () => {
 
 }
@@ -46,6 +57,7 @@ cardGame.displayContent = () => {
 cardGame.init = () => {
     cardGame.events();
     cardGame.getContent();
+    cardGame.matchGame();
 };
 
 $(() => {
