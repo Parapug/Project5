@@ -31,7 +31,7 @@ cardGame.displayContent = () => {
 }
 
 cardGame.events = () => {
-
+    
 }
 
 cardGame.init = () => {
@@ -39,7 +39,7 @@ cardGame.init = () => {
     cardGame.getContent();
 };
 
-$(() => {
+$(() =>{
     cardGame.init();
 });
 
