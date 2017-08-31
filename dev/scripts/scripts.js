@@ -26,18 +26,17 @@ cardGame.getContent = () => {
             callback: "?"
         }
     }).then(function (res) {
-        console.log(res.petfinder.pets.pet);
         let petData = res.petfinder.pets.pet;
 
-        petData.forEach((dog)=>{
+        petData.forEach((dog) => {
             cardGame.dogPics.push(dog.media.photos.photo[2]["$t"]);
         });
 
-        for (let i=0; i<8; i++){
-            let randomPick = Math.floor(Math.random()*cardGame.dogPics.length);
-            cardGame.randPics.forEach( (pic)=> {
-                while(cardGame.dogPics[randomPick] === pic) {
-                    randomPick = Math.floor(Math.random()*cardGame.dogPics.length);
+        for (let i = 0; i < 8; i++) {
+            let randomPick = Math.floor(Math.random() * cardGame.dogPics.length);
+            cardGame.randPics.forEach((pic) => {
+                while (cardGame.dogPics[randomPick] === pic) {
+                    randomPick = Math.floor(Math.random() * cardGame.dogPics.length);
                 }
             });
             cardGame.randPics.push(cardGame.dogPics[randomPick]);
@@ -54,45 +53,63 @@ cardGame.events = () => {
             title: "Sweet!",
             text: "Here's a custom image.",
             imageUrl: "images/thumbs-up.jpg"
-        }, ()=>{
+        }, () => {
             cardGame.getContent();
-        });   
+        });
     });
 }
 
 cardGame.matchGame = () => {
-$('.card').on('click', (e) => {
+    $('.card').on('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         let c = e.currentTarget.classList;
         if (c.contains('flipped') === true) {
             c.remove('flipped');
-        }  else {
+        } else {
             c.add('flipped');
         }
     });
 }
 
 cardGame.displayContent = () => {
-    $('.card__front').each( (i,el)=>{
+    $('.card__front').each((i, el) => {
         $(el).empty();
-        let randClass = Math.floor(Math.random()*cardGame.randPics.length);
+        let randClass = Math.floor(Math.random() * cardGame.randPics.length);
         let picsToUse = cardGame.randPics;
         let classNum = randClass.toString();
         let className = `dogPics${randClass}`;
-        let randPic = Math.floor(Math.random()*picsToUse.length);
-        let picString = picsToUse.splice(randPic,1);
+        let randPic = Math.floor(Math.random() * picsToUse.length);
+        let picString = picsToUse.splice(randPic, 1);
         $(el).attr('style', `background-image: url(${picString[0]})`);
         $(el).addClass(className);
-    });   
+        cardGame.gameFx(picString);
+    });
 }
+
+cardGame.gameFx = (pic) => {
+    $('.card').on('click', (e) => {
+        let c = e.currentTarget.classList;
+        if (c.contains('flipped') && pic = cardGame.randPics){
+            console.log('hi');
+        }
+});
+                  
+
+    
+//    3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped.
+    
+    //when two cards are flipped and pic === pic, than stay flipped
+};
+
+
 
 cardGame.init = () => {
     cardGame.events();
     cardGame.matchGame();
 };
 
-$(() =>{
+$(() => {
     cardGame.init();
 });
 
