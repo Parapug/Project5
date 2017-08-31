@@ -67,3 +67,11 @@
 .card.flipped .card__front {
     transform: rotateY(0deg);
 }
+
+ .match .card__back {
+    transform: rotateY(-180deg);
+}
+
+.match .card__front {
+    transform: rotateY(0deg);
+}

@@ -214,8 +214,8 @@ body.stop-scrolling {
   .sweet-alert[data-has-confirm-button=false][data-has-cancel-button=false] {
     padding-bottom: 40px; }
   .sweet-alert .sa-icon {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border: 4px solid gray;
     -webkit-border-radius: 40px;
     border-radius: 40px;
@@ -321,8 +321,8 @@ body.stop-scrolling {
         -webkit-transform-origin: 0px 60px;
         transform-origin: 0px 60px; }
       .sweet-alert .sa-icon.sa-success .sa-placeholder {
-        width: 80px;
-        height: 80px;
+        width: 120px;
+        height: 120px;
         border: 4px solid rgba(165, 220, 134, 0.2);
         -webkit-border-radius: 40px;
         border-radius: 40px;
