@@ -1,0 +1,44 @@
+.headerContent {
+    position: relative;
+
+    h1 {
+        margin: 30px;
+        text-shadow: 1px 1px 1px grey;
+    }
+}
+
+.pugImg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.startBtn,
+.closeBtn {
+    margin: 20px 0 0 30px;
+}
+
+.startBtn a,
+.closeBtn a {
+    background-color: $olive;
+    border: 2px solid $olive;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    color: $beige;
+    text-transform: uppercase;
+    padding: 10px;
+    letter-spacing: 2px;
+    transition: all 0.5s;
+    &:hover {
+        background-color: $beige;
+        color: $olive
+    }
+}
+
+.intro {
+    margin: 20px;
+
+    p {
+        padding: 20px;
+    }
+}

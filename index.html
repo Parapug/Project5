@@ -3,9 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Petfinder: the Card Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parapug</title>
+    <!--Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans" rel="stylesheet">
+    <!--Favicon-->
+    <link type="image/png" href="assets/bone.png" rel="icon">
+    <!--Sweet Alert style sheet-->
     <link rel="stylesheet" href="public/styles/sweetalert.css">
+    <!--General style sheet-->
     <link rel="stylesheet" href="public/styles/style.css">
 </head>
 
@@ -13,7 +19,10 @@
     <header id="landingPage">
         <div class="headerContent">
             <h1>Parapug</h1>
-            <button class="startBtn"><a href="#intro">Lets Start</a></button>
+            <button class="startBtn"><a href="#intro">Let's Play!</a></button>
+        </div>
+        <div class="pugImg">
+            <img src="assets/pug2.png" alt="">
         </div>
     </header>
     <section class="intro" id="intro">
@@ -24,13 +33,15 @@
         <div class="tracker">
             <div class="time">
                 <h3>Time</h3>
+                <p id="time"></p>
             </div>
             <div class="score">
                 <h3>Score</h3>
+                <p id="score"></p>
             </div>
         </div>
         <div class="mascot"></div>
-        <div class="gameBoard">
+        <div class="gameBoard clearfix">
             <div class="card">
                 <div class="card__back"><img src="assets/hoodedDog.svg" alt="hooded dog image"></div>
                 <div class="card__front"></div>
@@ -115,16 +126,16 @@
         <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hi! I just completed Parapug the game, give it a try!" data-url="http://www.parapug.com" data-show-count="false">Tweet</a>
         <button class="pAgain"><a href="#landingPage">Play Again</a></button>
     </section>
-    <footer>
+    <footer class="clearfix">
         <div class="creators">
-            <ul>
-                <li><a href="https://github.com/Incendie">Anson</a></li>
-                <li><a href="https://github.com/cchoi94">Cody</a></li>
-                <li><a href="https://github.com/JoceLum">Jocelyn</a></li>
+            <ul>Created By:
+                <li><a href="https://github.com/Incendie">Anson Li</a></li>
+                <li><a href="https://github.com/cchoi94">Cody Choi</a></li>
+                <li><a href="https://github.com/JoceLum">Jocelyn Lum</a></li>
             </ul>
         </div>
         <div class="powerBy">
-            <p><a href="https://petfinder.com">Powered By: Petfinder API</a></p>
+            <p>Powered By: <a href="https://petfinder.com">Petfinder API</a></p>
             <div class="footerImg"></div>
         </div>
     </footer>
