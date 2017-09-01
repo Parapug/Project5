@@ -27,12 +27,6 @@ gulp.task("styles", () => {
 		.pipe(reload({stream: true}));
 });
 
-// task to copy Sweet Alert css from dev folder to public folder
-// gulp.task("sweet-alert", () => {
-// 	gulp.src("./dev/styles/sweetalert2.css")
-// 	.pipe(gulp.dest("./public/styles/"))
-// });
-
 //task to compile js
 gulp.task("scripts", () => {
 	return gulp.src("./dev/scripts/**/*.js")
