@@ -1,3 +1,4 @@
 node_modules/
-public/
+public/styles/style.css
+public/scripts/scripts.js
 .DS_Store
