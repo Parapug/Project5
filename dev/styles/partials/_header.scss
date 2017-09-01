@@ -13,6 +13,10 @@
     right: 0;
 }
 
+.bounceInUp {
+  animation-duration: 2s;
+}
+
 .startBtn,
 .closeBtn {
     margin: 20px 0 0 30px;
@@ -24,9 +28,9 @@
     border: 2px solid $olive;
     font-size: 1.5rem;
     border-radius: 5px;
-    color: $beige;
+    color: #fff;
     text-transform: uppercase;
-    padding: 10px;
+    padding: 20px;
     letter-spacing: 2px;
     transition: all 0.5s;
     &:hover {
