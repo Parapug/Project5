@@ -4,6 +4,7 @@ cardGame.dogPics = [];
 cardGame.randPics = [];
 cardGame.gameStart = false;
 cardGame.previous = "";
+cardGame.clickAllowed = true;
 
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
@@ -64,35 +65,39 @@ cardGame.matchGame = () => {
     let counter = 0;
     cardGame.previous = '';
     let current = '';
+    if (cardGame.clickAllowed){
+        $('.card').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            cardGame.gameStart = true;
+            counter++;
 
-    $('.card').on('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        cardGame.gameStart = true;
-        counter++;
-        let c = e.currentTarget.classList;
-        if (c.contains('flipped') === true) {
-            c.remove('flipped');
-            console.log("remove flip");
-        } else {
-            c.add('flipped');
-        }
-
-        if (counter === 2) {
-            cardGame.gameFx($(this), cardGame.previous);
-            counter = 0;
-        } else if (counter === 1) {
-            cardGame.previous = $(this);
-        } else {
-            counter = 0;
-        }
-    });
+            let c = e.currentTarget.classList;
+            if (!c.contains('flipped')) {
+                c.add('flipped');
+                if (counter >= 2) {
+                    cardGame.clickAllowed = false;
+                    cardGame.gameFx($(this), cardGame.previous);
+                    counter = 0;
+                } else if (counter === 1) {
+                    cardGame.previous = $(this);
+                } else {
+                    counter = 0;
+                }
+            }
+        });
+    }
 }
 
 cardGame.displayContent = () => {
+    let pickArray = [];
+    for (let i=1; i<=16; i++){
+        pickArray.push(i);
+    }
     $('.card__front').each((i, el) => {
         $(el).empty();
-        let randClass = Math.floor(Math.random() * cardGame.randPics.length);
+        
+        let randClass = pickArray.splice(Math.floor(Math.random() * cardGame.randPics.length),1);
         let picsToUse = cardGame.randPics;
         let classNum = randClass.toString();
         let className = `dogPics${randClass}`;
@@ -111,16 +116,22 @@ cardGame.gameFx = (current, prev) => {
     let previousDogPicsClass = "";
     previousDogPicsClass = prev.children(".card__front").attr('class');
     previousDogPicsClass = "." + previousDogPicsClass.replace("card__front ", "");
+    console.log($(currentDogPicsClass).css('background-image'));
+    console.log("VS.");
+    console.log($(previousDogPicsClass).css('background-image'));
+    
+    // $('.card').off('click');
     if ($(currentDogPicsClass).css('background-image') === $(previousDogPicsClass).css('background-image')) {
         current.addClass('match');
-    } else {
-        setTimeout( () => {
-            current.removeClass('flipped');
-            prev.removeClass('flipped');            
-        },1500);
+        prev.addClass('match');
+        console.log('match found');
     }
-
-
+     setTimeout( () => { 
+        current.removeClass('flipped');
+        prev.removeClass('flipped');
+        cardGame.clickAllowed = true;
+     },600);
+   
 
 
 
