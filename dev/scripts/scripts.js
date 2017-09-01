@@ -2,6 +2,7 @@ var cardGame = {};
 cardGame.key = '6cc621452cadd6d6f867f4435723803f';
 cardGame.dogPics = [];
 cardGame.randPics = [];
+cardGame.timer = 0;
 cardGame.gameStart = false;
 cardGame.previous = "";
 cardGame.clickAllowed = true;
@@ -72,10 +73,37 @@ cardGame.matchGame = () => {
             cardGame.gameStart = true;
             counter++;
 
+            if (cardGame.gameStart) {
+                console.log("timer");
+                let timeString = ""
+                let secondsString = "";
+                let subSecondsString = "";
+                let minutes;
+                let seconds;
+                let subSeconds;
+
+                setInterval(()=>{
+                    cardGame.timer++;    
+                    subSeconds = cardGame.timer%100;
+                    subSecondsString = subSeconds.toString();
+                    seconds = Math.floor(cardGame.timer/100)%60;
+                    minutes = ((cardGame.timer/100)/60)%60;
+                    if (seconds<=9) {
+                        secondsString ="0" + seconds.toString();                    
+                    } else {
+                        secondsString =seconds.toString();
+                    }
+
+                    minutesString = Math.floor(minutes).toString();
+                    timeString = `${minutesString}:${secondsString}.${subSeconds}`    
+                    $("#time").text(timeString);
+                }, 10);
+            }
             let c = e.currentTarget.classList;
             if (!c.contains('flipped')) {
                 c.add('flipped');
-                if (counter >= 2) {
+
+             if (counter >= 2) {
                     cardGame.clickAllowed = false;
                     cardGame.gameFx($(this), cardGame.previous);
                     counter = 0;
@@ -131,23 +159,8 @@ cardGame.gameFx = (current, prev) => {
         prev.removeClass('flipped');
         cardGame.clickAllowed = true;
      },600);
-   
-
-
-
-
-    //    if ($('').css('background-image') === $('').css('background-image')) {
-    //        
-    //    }
 }
-
-
-
-
-
 //    3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped.
-
-
 
 cardGame.init = () => {
     cardGame.events();
