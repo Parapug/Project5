@@ -27,6 +27,12 @@ gulp.task("styles", () => {
 		.pipe(reload({stream: true}));
 });
 
+//task to copy over sweet alert css
+// gulp.task("sweet-alert", () => {
+// 	return gulp.src("./dev/styles/sweetalert2.css")
+// 	.pipe(gulp.dest("./public/styles/"))
+// })
+
 //task to compile js
 gulp.task("scripts", () => {
 	return gulp.src("./dev/scripts/**/*.js")

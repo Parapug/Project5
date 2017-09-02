@@ -9,7 +9,7 @@
 
 .pugImg {
     position: absolute;
-    bottom: 0;
+    bottom: -34px;
     right: 0;
 }
 
@@ -17,13 +17,11 @@
   animation-duration: 2s;
 }
 
-.startBtn,
-.closeBtn {
-    margin: 20px 0 0 30px;
-}
+    .startBtn {
+        margin: 20px 0 0 30px;
+    }
 
-.startBtn a,
-.closeBtn a {
+.startBtn a {
     background-color: $olive;
     border: 2px solid $olive;
     font-size: 1.5rem;

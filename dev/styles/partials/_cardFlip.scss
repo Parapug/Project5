@@ -1,8 +1,15 @@
+.swal2-modal .swal2-image {
+    max-width: 20%;
+}
+
 #game {
     background-color: $blue;
 
     .gameBoard {
-        padding: 100px;
+        padding: 10px;
+        margin: 50px;
+        border: 5px solid $olive;
+        border-radius: 10px;
     }
 }
 
@@ -14,11 +21,16 @@
         display: inline-block;
         padding: 50px;
 
-
         h3 {
             text-transform: uppercase;
             letter-spacing: 2px;
             color: $olive;
+        }
+
+        p {
+            font-family: $headingFont;
+            font-size: 4rem;
+            color: #fff;
         }
     }
 }
@@ -26,28 +38,30 @@
 .card {
     position: relative;
     perspective: 2000px;
-    padding-bottom: 25%;
-    width: 25%;
+    height: 200px;
+    width: calc(25% - 20px);
+    margin: 10px;
     float: left;
     border: 5px solid #0C3A59;
-    border-right: none;
 }
 
 .card__front,
 .card__back {
     position: absolute;
+    border-radius: 10px;
     transition: transform 0.7s;
     backface-visibility: hidden;
 }
 
 .card__back {
     transform: rotateY(0deg);
-    background-color: $beige;
+    background-color: #fff;
     width: 100%;
 }
 
 .card__back img {
     width: 100%;
+    height: 200px;
 }
 
 .card__front {
@@ -67,7 +81,7 @@
     transform: rotateY(0deg);
 }
 
- .match .card__back {
+.match .card__back {
     transform: rotateY(-180deg);
 }
 
