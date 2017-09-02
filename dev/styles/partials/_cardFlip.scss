@@ -1,3 +1,11 @@
+.swal2-modal .swal2-image {
+    max-width: 50%;
+}
+
+.swal2-modal, .swal2-show {
+    width: 600px !important;
+}
+
 #game {
     background-color: $blue;
 
