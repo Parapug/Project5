@@ -34,6 +34,7 @@ cardGame.getContent = () => {
         }
     }).then(function (res) {
         //pick random photos from the API
+        console.log(res);
         cardGame.pickRandPhotos(res);
     });
 }
@@ -64,14 +65,15 @@ cardGame.pickRandPhotos = (res) => {
 }
 
 //event handler function
-cardGame.events = () => {
+cardGame.events = () => {    
     $('.startBtn').on('click', () => {
         swal({
             title: 'Sweet!',
             text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos architecto quaerat omnis minus excepturi ut praesentium, soluta laudantium perspiciatis inventore? Ea assumenda tempore natus ducimus ipsum laudantium officiis, enim voluptas.',
             imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
-        }, () => {
+        }).then( () => {
             //make AJAX call after user clicks OK on the alert
+            console.log("test");
             cardGame.getContent();
         });
     });
@@ -100,6 +102,8 @@ cardGame.matchGame = () => {
 //function for game effects and mechanics
 cardGame.gameFX = (element, c, counter) => {
     //flip card if card is face down, otherwise do nothing
+    console.log(element);
+    console.log(c);
     if (!(c.contains('flipped') || c.contains('match'))) {
         c.add('flipped');
         //check for match after 2 cards flipped
@@ -146,7 +150,7 @@ cardGame.showTimer = () => {
             $('#time').text(timeString);
             if (cardGame.matches >= 8) {
                 cardGame.gameStart = false;
-                cardGame.stop();
+                clearInterval(cardGame.interval);
             }
         }, 10);
     }
@@ -212,7 +216,7 @@ cardGame.init = () => {
     cardGame.events();
 };
 
-$(() => {
+$(() => {    
     cardGame.init();
 });
 
