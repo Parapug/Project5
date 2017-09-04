@@ -7,6 +7,19 @@
     }
 }
 
+input[type="text"] {
+    font-family: $textFont;
+    font-size: 1.5rem;
+    margin-right: 5px;
+    margin-left: 30px;
+    border-radius: 5px;
+    width: 400px;
+    padding: 15px;
+    outline: none;
+    border: none;
+    display: block; 
+}
+
 .pugImg {
     position: absolute;
     bottom: -34px;
@@ -14,12 +27,12 @@
 }
 
 .bounceInUp {
-  animation-duration: 2s;
+    animation-duration: 2s;
 }
 
-    .startBtn {
-        margin: 20px 0 0 30px;
-    }
+.startBtn {
+    margin: 50px 0 0 30px;
+}
 
 .startBtn a {
     background-color: $olive;
