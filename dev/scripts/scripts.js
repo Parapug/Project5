@@ -80,8 +80,8 @@ cardGame.events = () => {
 cardGame.matchGame = () => {
     cardGame.previous = '';
     let current = '';
-    if (cardGame.clickAllowed){
-    cardGame.gameStart = true;  
+    if (cardGame.clickAllowed) {
+        cardGame.gameStart = true;
         $('.card').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
@@ -92,7 +92,7 @@ cardGame.matchGame = () => {
                 cardGame.showTimer();
             }
             //run function handling game effects and mechanics
-            cardGame.gameFX($(this), e.currentTarget.classList, cardGame.counter);          
+            cardGame.gameFX($(this), e.currentTarget.classList, cardGame.counter);
         });
     }
 }
@@ -113,7 +113,7 @@ cardGame.gameFX = (element, c, counter) => {
         }
     }
 
-    
+
 }
 
 //calculate and display timer on page
@@ -126,25 +126,25 @@ cardGame.showTimer = () => {
     let subSeconds;
     cardGame.gameStart = false;
 
-    if (cardGame.matches < 8){
+    if (cardGame.matches < 8) {
         //timer format mm:ss.xx
-        cardGame.interval = setInterval(()=>{
-            console.log("cardGame.interval",cardGame.interval);
-            cardGame.timer++;   
-            subSeconds = cardGame.timer%100;
+        cardGame.interval = setInterval(() => {
+            console.log("cardGame.interval", cardGame.interval);
+            cardGame.timer++;
+            subSeconds = cardGame.timer % 100;
             subSecondsString = subSeconds.toString();
-            seconds = Math.floor(cardGame.timer/100)%60;
-            minutes = ((cardGame.timer/100)/60)%60;
-            if (seconds<=9) {
-                secondsString ='0' + seconds.toString();                    
+            seconds = Math.floor(cardGame.timer / 100) % 60;
+            minutes = ((cardGame.timer / 100) / 60) % 60;
+            if (seconds <= 9) {
+                secondsString = '0' + seconds.toString();
             } else {
                 secondsString = seconds.toString();
             }
 
             minutesString = Math.floor(minutes).toString();
-            timeString = `${minutesString}:${secondsString}.${subSeconds}`    
+            timeString = `${minutesString}:${secondsString}.${subSeconds}`
             $('#time').text(timeString);
-            if (cardGame.matches >= 8){
+            if (cardGame.matches >= 8) {
                 cardGame.gameStart = false;
                 cardGame.stop();
             }
@@ -155,7 +155,7 @@ cardGame.showTimer = () => {
 cardGame.displayContent = () => {
     //make an array of numbers from 1-16 for card identification
     let pickArray = [];
-    for (let i=1; i<=16; i++){
+    for (let i = 1; i <= 16; i++) {
         pickArray.push(i);
     }
 
@@ -164,7 +164,7 @@ cardGame.displayContent = () => {
         $(el).empty();
 
         //assign a random card number to the current div.card
-        let randClass = pickArray.splice(Math.floor(Math.random() * cardGame.randPics.length),1);
+        let randClass = pickArray.splice(Math.floor(Math.random() * cardGame.randPics.length), 1);
         let picsToUse = cardGame.randPics;
         let classNum = randClass.toString();
 
@@ -178,7 +178,7 @@ cardGame.displayContent = () => {
         $(el).addClass(className);
     });
     //start the game
-    cardGame.matchGame();
+    cardGame.checkMatch();
 }
 
 //check for matches between the two clicked cards
@@ -191,22 +191,22 @@ cardGame.checkMatch = (current, prev) => {
     let previousDogPicsClass = '';
     previousDogPicsClass = prev.children('.card__front').attr('class');
     previousDogPicsClass = '.' + previousDogPicsClass.replace('card__front ', '');
- 
+
     // if the cards match, give them a class of match
     if ($(currentDogPicsClass).css('background-image') === $(previousDogPicsClass).css('background-image')) {
         current.addClass('match');
         prev.addClass('match');
         cardGame.matches++;
     } // remove the class of flipped
-    setTimeout( () => { 
+    setTimeout(() => {
         //if cards don't have a flipped class, they flip back
         //if cards have a class of match, they stay flipped
         current.removeClass('flipped');
         prev.removeClass('flipped');
         cardGame.clickAllowed = true;
-    },1000);
+    }, 1000);
 }
-//    3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped.
+
 
 cardGame.init = () => {
     cardGame.events();
