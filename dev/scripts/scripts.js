@@ -42,7 +42,7 @@ cardGame.displayLead = () => {
         })
 
         for (let i = 0; i < 5; i++) {
-            $('.leaderBoard').append(`<p>Name ${scoresArray[i].name}, Time: ${scoresArray[i].timeString}`);
+            $('.leaderBoard').append(`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}`);
         }
     })
 }
@@ -63,7 +63,6 @@ cardGame.getContent = () => {
         }
     }).then(function (res) {
         //pick random photos from the API
-        console.log(res);
         cardGame.pickRandPhotos(res);
     });
 }
