@@ -8,6 +8,7 @@ cardGame.gameStart = false;
 cardGame.previous;
 cardGame.clickAllowed = true;
 cardGame.matches = 0;
+cardGame.leadBoard = firebase.database().ref();
 
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
@@ -18,7 +19,34 @@ cardGame.matches = 0;
 // 		3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
 // 		4. Once the # of matches = 8, then the timer stops and the game is over.
 // 		5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
+//leaderboard Firebase
+cardGame.newLead = (timer, string) => {
+    cardGame.leadBoard.push({
+        // name: cardGame.playerName,
+        time: timer,
+        timeString: string
+    })
+}
 
+cardGame.displayLead = () => {
+    cardGame.leadBoard.on("value", (scores) => {
+        let topFive = [];
+        let dataArray = scores.val();
+        let scoresArray = [];
+
+        for (let key in dataArray) {
+            scoresArray.push(dataArray[key]);
+        }
+
+        scoresArray.sort( (a, b) => {
+            return a.time - b.time;
+        })
+
+        for (let i=0; i<5; i++) {
+            $('.leaderboard').append(`<p>Name: FAKENAME, Time: ${scoresArray[i].timeString}`);
+        }
+    })
+}
 //AJAX call to Petfinder API
 cardGame.getContent = () => {
     $.ajax({
@@ -30,7 +58,8 @@ cardGame.getContent = () => {
             location: 'Toronto, On',
             animal: 'dog',
             format: 'json',
-            callback: "?"
+            callback: "?",
+            breed: "Pug"
         }
     }).then(function (res) {
         //pick random photos from the API
@@ -115,9 +144,7 @@ cardGame.gameFX = (element, c, counter) => {
             //on the first click, save this card for later
             cardGame.previous = element;
         }
-    }
-
-    
+    }    
 }
 
 //calculate and display timer on page
@@ -146,11 +173,13 @@ cardGame.showTimer = () => {
             }
 
             minutesString = Math.floor(minutes).toString();
-            timeString = `${minutesString}:${secondsString}.${subSeconds}`    
-            $('#time').text(timeString);
+            cardGame.timeString = `${minutesString}:${secondsString}.${subSeconds}`    
+            $('#time').text(cardGame.timeString);
             if (cardGame.matches >= 8){
                 cardGame.gameStart = false;
                 clearInterval(cardGame.interval);
+                cardGame.newLead(cardGame.timer, cardGame.timeString);
+                cardGame.displayLead();
             }
         }, 10);
     }
