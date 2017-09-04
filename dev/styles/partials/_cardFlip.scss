@@ -5,12 +5,16 @@
 #game {
     background-color: $blue;
     padding: 20px 0px 40px 0px;
+    display: none;
+    position: relative;
     .gameBoard {
         padding: 5px;
         border: 5px solid $olive;
         border-radius: 10px;
         float: left;
         width: 60vw;
+        margin: 50px auto;
+
     }
 }
 
@@ -21,7 +25,7 @@
     .time,
     .score {
         margin: 20px 0;
-        padding: 60px 0;
+        padding: 30px 0;
         h3 {
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -29,17 +33,28 @@
         }
         p {
             font-family: $headingFont;
-            font-size: 4rem;
+            font-size: 3rem;
             color: #fff;
         }
     }
-    .mascot{
+    .mascot {
         background-image: url(../../../assets/pugMascot.png);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         height: 45vh;
     }
+}
+
+.leaderBoard {
+    width: 20%;
+    border: 2px #fff solid;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 50px;
 }
 
 .card {
