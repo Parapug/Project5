@@ -13,11 +13,11 @@ cardGame.matches = 0;
 // Loading screen, if needed, while AJAX calls request pics of doges
 // Game board loads with 4x4 layout, cards face down
 // Timer starts when a card is flipped
-// 		1. On click of a card, it flips and reveals a doge
-// 		2. On click of a second card, it also flips and reveals a doge
-// 		3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
-// 		4. Once the # of matches = 8, then the timer stops and the game is over.
-// 		5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
+//      1. On click of a card, it flips and reveals a doge
+//      2. On click of a second card, it also flips and reveals a doge
+//      3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
+//      4. Once the # of matches = 8, then the timer stops and the game is over.
+//      5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
 
 //AJAX call to Petfinder API
 cardGame.getContent = () => {
@@ -30,9 +30,10 @@ cardGame.getContent = () => {
             location: 'Toronto, On',
             animal: 'dog',
             format: 'json',
-            callback: "?"
+            callback: "?",
+            breed: "Pug"
         }
-    }).then(function (res) {
+    }).then(function(res) {
         //pick random photos from the API
         console.log(res);
         cardGame.pickRandPhotos(res);
@@ -65,16 +66,17 @@ cardGame.pickRandPhotos = (res) => {
 }
 
 //event handler function
-cardGame.events = () => {    
+cardGame.events = () => {
     $('.startBtn').on('click', () => {
         swal({
-            title: 'Sweet!',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos architecto quaerat omnis minus excepturi ut praesentium, soluta laudantium perspiciatis inventore? Ea assumenda tempore natus ducimus ipsum laudantium officiis, enim voluptas.',
+            title: 'Welcome!',
+            text: 'Find all the matches as quick as you can, and see if you make your way to the top of our leaderboard! Wroof!',
             imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
-        }).then( () => {
+        }).then(() => {
             //make AJAX call after user clicks OK on the alert
-            console.log("test");
             cardGame.getContent();
+            $('#game').css('display', 'block');
+            $('#landingPage').css('display', 'none');
         });
     });
 }
@@ -84,7 +86,11 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
+<<<<<<< HEAD
         $('.card').on('click', function (e) {
+=======
+        $('.card').on('click', function(e) {
+>>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
@@ -102,8 +108,8 @@ cardGame.matchGame = () => {
 //function for game effects and mechanics
 cardGame.gameFX = (element, c, counter) => {
     //flip card if card is face down, otherwise do nothing
-    console.log(element);
-    console.log(c);
+    $('#score').text(cardGame.matches);
+
     if (!(c.contains('flipped') || c.contains('match'))) {
         c.add('flipped');
         //check for match after 2 cards flipped
@@ -133,7 +139,10 @@ cardGame.showTimer = () => {
     if (cardGame.matches < 8) {
         //timer format mm:ss.xx
         cardGame.interval = setInterval(() => {
+<<<<<<< HEAD
             console.log("cardGame.interval", cardGame.interval);
+=======
+>>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             cardGame.timer++;
             subSeconds = cardGame.timer % 100;
             subSecondsString = subSeconds.toString();
@@ -146,11 +155,25 @@ cardGame.showTimer = () => {
             }
 
             minutesString = Math.floor(minutes).toString();
+<<<<<<< HEAD
             timeString = `${minutesString}:${secondsString}.${subSeconds}`
             $('#time').text(timeString);
+=======
+            cardGame.timeString = `${minutesString}:${secondsString}.${subSeconds}`
+            $('#time').text(cardGame.timeString);
+>>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             if (cardGame.matches >= 8) {
                 cardGame.gameStart = false;
                 clearInterval(cardGame.interval);
+                 setTimeout(() => { swal({
+                    title: 'You did it!',
+                    html: `Your final time: ${cardGame.timeString}         <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="I just took the Metal Subgenre Quiz! You should too!" data-url="http://metalsubgenre.xyz" data-hashtags="getMetal" data-show-count="false">Tweet</a>`,
+                    imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
+                }).then(() => {
+                    //make AJAX call after user clicks OK on the alert
+                    console.log("it works!");
+                });
+            }, 1000)
             }
         }, 10);
     }
@@ -189,7 +212,6 @@ cardGame.displayContent = () => {
 cardGame.checkMatch = (current, prev) => {
     //isolate the dogPics# class from .card__front of both cards
     let currentDogPicsClass = "";
-    console.log(current);
     currentDogPicsClass = current.children('.card__front').attr('class');
     currentDogPicsClass = "." + currentDogPicsClass.replace('card__front ', '');
     let previousDogPicsClass = '';
@@ -201,6 +223,7 @@ cardGame.checkMatch = (current, prev) => {
         current.addClass('match');
         prev.addClass('match');
         cardGame.matches++;
+        $('#score').text(cardGame.matches);
     } // remove the class of flipped
     setTimeout(() => {
         //if cards don't have a flipped class, they flip back
@@ -216,7 +239,7 @@ cardGame.init = () => {
     cardGame.events();
 };
 
-$(() => {    
+$(() => {
     cardGame.init();
 });
 
