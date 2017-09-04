@@ -6,12 +6,13 @@
     background-color: $blue;
     padding: 20px 0px 40px 0px;
     display: none;
+    position: relative;
     .gameBoard {
         padding: 5px;
         border: 5px solid $olive;
         border-radius: 10px;
         float: left;
-        width: 60vw;
+        width: 80%;
     }
 }
 
@@ -34,13 +35,24 @@
             color: #fff;
         }
     }
-    .mascot{
+    .mascot {
         background-image: url(../../../assets/pugMascot.png);
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
         height: 45vh;
     }
+}
+
+.leaderBoard {
+    width: 20%;
+    border: 2px #fff solid;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 50px;
 }
 
 .card {
