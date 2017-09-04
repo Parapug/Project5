@@ -21,7 +21,12 @@
     <header id="landingPage">
         <div class="headerContent">
             <h1 class="animated lightSpeedIn">Parapug</h1>
-            <button class="startBtn"><a href="#intro">Let's Play!</a></button>
+            <form>
+                <form>
+                    <label for="name">Hey friend! What is your name?</label>
+                    <input type="text" id="playerName" placeholder="name">
+                    <button type="submit" class="startBtn"><a href="#intro">Let's Play!</a></button>
+                </form>
         </div>
         <div class="pugImg">
             <img class="animated bounceInUp" src="assets/pug2.png" alt="">
@@ -37,10 +42,10 @@
                 <h3>Score</h3>
                 <p id="score"></p>
             </div>
-<div class="mascot">
-</div>
+            <div class="mascot">
+            </div>
         </div>
- <div class="wrapper clearfix">
+        <div class="wrapper clearfix">
             <div class="gameBoard clearfix">
                 <div class="card">
                     <div class="card__back"><img src="assets/hoodedDog.svg" alt="hooded dog image"></div>
@@ -108,6 +113,7 @@
                 </div>
             </div>
         </div>
+        <aside class="leaderBoard"></aside>
     </main>
     <footer class="clearfix">
         <div class="creators">
@@ -123,10 +129,25 @@
             <div class="footerImg"></div>
         </div>
     </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCTSikDb70-CbBbc5RFCKrVQhkumD6aiL4",
+            authDomain: "leaderboard-4910f.firebaseapp.com",
+            databaseURL: "https://leaderboard-4910f.firebaseio.com",
+            projectId: "leaderboard-4910f",
+            storageBucket: "",
+            messagingSenderId: "1015676411740"
+        };
+        firebase.initializeApp(config);
+
+    </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script src="dev/scripts/scripts.js"></script>
+    <script src="public/scripts/scripts.js"></script>
 </body>
 
 </html>

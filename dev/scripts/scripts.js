@@ -8,7 +8,7 @@ cardGame.gameStart = false;
 cardGame.previous;
 cardGame.clickAllowed = true;
 cardGame.matches = 0;
-
+cardGame.leadBoard= firebase.database().ref();
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
 // Game board loads with 4x4 layout, cards face down
@@ -18,6 +18,34 @@ cardGame.matches = 0;
 //      3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
 //      4. Once the # of matches = 8, then the timer stops and the game is over.
 //      5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
+
+cardGame.newLead = (timer, string) => {
+    cardGame.leadBoard.push({
+        name: $('#playerName').val(),
+        time: timer,
+        timeString: string
+    })
+}
+
+cardGame.displayLead = () => {
+    cardGame.leadBoard.on("value", (scores) => {
+        let topFive = [];
+        let dataArray = scores.val();
+        let scoresArray = [];
+
+        for (let key in dataArray) {
+            scoresArray.push(dataArray[key]);
+        }
+
+        scoresArray.sort((a, b) => {
+            return a.time - b.time;
+        })
+
+        for (let i = 0; i < 5; i++) {
+            $('.leaderBoard').append(`<p>Name ${scoresArray[i].name}, Time: ${scoresArray[i].timeString}`);
+        }
+    })
+}
 
 //AJAX call to Petfinder API
 cardGame.getContent = () => {
@@ -33,7 +61,7 @@ cardGame.getContent = () => {
             callback: "?",
             breed: "Pug"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         //pick random photos from the API
         console.log(res);
         cardGame.pickRandPhotos(res);
@@ -67,7 +95,8 @@ cardGame.pickRandPhotos = (res) => {
 
 //event handler function
 cardGame.events = () => {
-    $('.startBtn').on('click', () => {
+    $('.startBtn').on('click', (e) => {
+        e.preventDefault();
         swal({
             title: 'Welcome!',
             text: 'Find all the matches as quick as you can, and see if you make your way to the top of our leaderboard! Wroof!',
@@ -86,7 +115,7 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
-        $('.card').on('click', function(e) {
+        $('.card').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
@@ -126,6 +155,7 @@ cardGame.gameFX = (element, c, counter) => {
 cardGame.showTimer = () => {
     let timeString = ""
     let secondsString = "";
+    let minutesString = "";
     let subSecondsString = "";
     let minutes;
     let seconds;
@@ -152,15 +182,18 @@ cardGame.showTimer = () => {
             if (cardGame.matches >= 8) {
                 cardGame.gameStart = false;
                 clearInterval(cardGame.interval);
-                 setTimeout(() => { swal({
-                    title: 'You did it!',
-                    html: `Your final time: ${cardGame.timeString}         <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="I just took the Metal Subgenre Quiz! You should too!" data-url="http://metalsubgenre.xyz" data-hashtags="getMetal" data-show-count="false">Tweet</a>`,
-                    imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
-                }).then(() => {
-                    //make AJAX call after user clicks OK on the alert
-                    console.log("it works!");
-                });
-            }, 1000)
+                setTimeout(() => {
+                    swal({
+                        title: 'You did it!',
+                        html: `Your final time: ${cardGame.timeString}         <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="I just took the Metal Subgenre Quiz! You should too!" data-url="http://metalsubgenre.xyz" data-hashtags="getMetal" data-show-count="false">Tweet</a>`,
+                        imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
+                    }).then(() => {
+                        //make AJAX call after user clicks OK on the alert
+                        console.log("it works!");
+                    cardGame.newLead(cardGame.timer, cardGame.timeString);
+                    cardGame.displayLead();
+                    });
+                }, 1000)
             }
         }, 10);
     }
