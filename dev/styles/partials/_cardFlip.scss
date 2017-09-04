@@ -12,7 +12,9 @@
         border: 5px solid $olive;
         border-radius: 10px;
         float: left;
-        width: 80%;
+        width: 60vw;
+        margin: 50px auto;
+
     }
 }
 
@@ -23,7 +25,7 @@
     .time,
     .score {
         margin: 20px 0;
-        padding: 60px 0;
+        padding: 30px 0;
         h3 {
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -31,7 +33,7 @@
         }
         p {
             font-family: $headingFont;
-            font-size: 4rem;
+            font-size: 3rem;
             color: #fff;
         }
     }
