@@ -76,13 +76,8 @@ cardGame.pickRandPhotos = function (res) {
 cardGame.events = function () {
     $('.startBtn').on('click', function () {
         swal({
-<<<<<<< HEAD
-            title: 'Sweet!',
-            text: 'Find all the matches as quick as you can Wroof!',
-=======
             title: 'Welcome!',
             text: 'Find all the matches as quick as you can, and see if you make your way to the top of our leaderboard! Wroof!',
->>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             imageUrl: 'https://i.pinimg.com/736x/f2/41/46/f24146096d2f87e31745a182ff395b10--pug-cartoon-art-ideas.jpg'
         }).then(function () {
             //make AJAX call after user clicks OK on the alert
@@ -203,7 +198,7 @@ cardGame.displayContent = function () {
         $(el).addClass(className);
     });
     //start the game
-    cardGame.checkMatch();
+    cardGame.matchGame();
 };
 
 //check for matches between the two clicked cards
@@ -231,6 +226,7 @@ cardGame.checkMatch = function (current, prev) {
         cardGame.clickAllowed = true;
     }, 1000);
 };
+//    3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped.
 
 cardGame.init = function () {
     cardGame.events();

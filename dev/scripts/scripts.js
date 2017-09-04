@@ -86,11 +86,7 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
-<<<<<<< HEAD
-        $('.card').on('click', function (e) {
-=======
         $('.card').on('click', function(e) {
->>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
@@ -139,10 +135,6 @@ cardGame.showTimer = () => {
     if (cardGame.matches < 8) {
         //timer format mm:ss.xx
         cardGame.interval = setInterval(() => {
-<<<<<<< HEAD
-            console.log("cardGame.interval", cardGame.interval);
-=======
->>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             cardGame.timer++;
             subSeconds = cardGame.timer % 100;
             subSecondsString = subSeconds.toString();
@@ -155,13 +147,8 @@ cardGame.showTimer = () => {
             }
 
             minutesString = Math.floor(minutes).toString();
-<<<<<<< HEAD
-            timeString = `${minutesString}:${secondsString}.${subSeconds}`
-            $('#time').text(timeString);
-=======
             cardGame.timeString = `${minutesString}:${secondsString}.${subSeconds}`
             $('#time').text(cardGame.timeString);
->>>>>>> 163ff06cdd49ceb5b47f0c68b8b02f6874df749a
             if (cardGame.matches >= 8) {
                 cardGame.gameStart = false;
                 clearInterval(cardGame.interval);
@@ -205,7 +192,7 @@ cardGame.displayContent = () => {
         $(el).addClass(className);
     });
     //start the game
-    cardGame.checkMatch();
+    cardGame.matchGame();
 }
 
 //check for matches between the two clicked cards
@@ -233,7 +220,7 @@ cardGame.checkMatch = (current, prev) => {
         cardGame.clickAllowed = true;
     }, 1000);
 }
-
+//    3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped.
 
 cardGame.init = () => {
     cardGame.events();
