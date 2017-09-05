@@ -4,13 +4,11 @@ footer {
     padding: 20px;
     text-align: center;
     position: relative;
-
     .creators h2,
     .creators li a,
     .powerBy a {
         color: $beige;
     }
-
     .creators h2 {
         border-bottom: 2px solid $beige;
         display: inline-block;
@@ -18,31 +16,25 @@ footer {
         font-weight: 400;
         text-transform: uppercase;
     }
-
     .creators li {
         padding: 20px;
         margin: 20px auto;
         display: inline-block;
         font-size: 1rem;
     }
-
     .creators li:nth-child(2) {
         border-left: 1px solid $beige;
         border-right: 1px solid $beige;
     }
-
     @include respond-to('medium') {
         .creators li {
             display: block;
             margin: 0 auto;
             font-size: 1.5rem;
         }
-
-
         .creators li:nth-child(2) {
             border: none;
         }
-
         .powerBy {
             clear: both;
         }
