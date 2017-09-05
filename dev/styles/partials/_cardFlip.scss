@@ -45,7 +45,7 @@
     @include respond-to('small') {
         & {
             float: left;
-            margin: 0 30px;
+            margin: 0 30px;            
         }
     } 
     h3 {
@@ -57,6 +57,8 @@
         font-family: $headingFont;
         font-size: 3rem;
         color: #fff;
+        padding: 0 10px;
+        max-width: 100px;        
     }
 
     @include respond-to('medium') {
@@ -66,7 +68,7 @@
     }
     @include respond-to('small') {
         p {
-            font-size: 3rem;
+            font-size: 2rem;
         }
     }
 }
