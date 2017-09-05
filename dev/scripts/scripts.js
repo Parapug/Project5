@@ -66,7 +66,7 @@ cardGame.getContent = () => {
             callback: "?",
             breed: "Pug"
         }
-    }).then(function(res) {
+    }).then(function (res) {
         //pick random photos from the API
         cardGame.pickRandPhotos(res);
     });
@@ -120,7 +120,7 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
-        $('.card').on('click', function(e) {
+        $('.card').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
