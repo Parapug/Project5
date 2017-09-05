@@ -48,6 +48,7 @@
             margin: 0 30px;            
         }
     } 
+
     h3 {
         text-transform: uppercase;
         letter-spacing: 2px;
@@ -60,7 +61,6 @@
         padding: 0 10px;
         max-width: 100px;        
     }
-
     @include respond-to('medium') {
         p {
             font-size: 1.3rem;
@@ -109,7 +109,6 @@
         display: inline-block;
         letter-spacing: 5px;
     }
-
     p {
         font-family: 'Montserrat', sans-serif;
         letter-spacing: 2px;
@@ -175,7 +174,6 @@
 .swal2-modal .swal2-content a {
     display: block;
     margin: 15px auto;
-
     .fa-circle {
         color: #4099FF;
     }
