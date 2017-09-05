@@ -31,7 +31,7 @@
 @include respond-to('small') {
     .tracker {
         margin: 0 auto;
-        width: 100vh;
+        width: 100vw;
     }
 }
 
