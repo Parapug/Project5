@@ -71,6 +71,8 @@ input[type="text"] {
 .startBtn {
     margin: 50px 0 0 30px;
     display: block;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 @include respond-to('medium') {
