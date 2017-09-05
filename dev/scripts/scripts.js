@@ -51,9 +51,9 @@ cardGame.displayLead = () => {
         })
 
         for (let i = 0; i < 5; i++) {
-            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);
-            $('.leaderBoard').html(boardString);
+            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);            
         }
+        $('.leaderBoard').html(boardString);
     })
 }
 
