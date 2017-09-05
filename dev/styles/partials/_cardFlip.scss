@@ -15,49 +15,83 @@
         width: 60vw;
         margin: 50px auto;
     }
+    @include respond-to('small') {
+        .gameBoard {
+            width: 90vw;
+        }
+    }
 }
 
 .tracker {
     text-align: center;
     float: left;
     width: 20vw;
-    .time,
-    .score {
-        margin: 20px 0;
-        padding: 30px 0;
-        h3 {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: $beige;
-        }
+}
+
+@include respond-to('small') {
+    .tracker {
+        margin: 0 auto;
+        width: 100vh;
+    }
+}
+
+.time,
+.score {
+    margin: 20px 0;
+    padding: 30px 0;
+
+    h3 {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $beige;
+    }
+    p {
+        font-family: $headingFont;
+        font-size: 3rem;
+        color: #fff;
+    }
+
+    @include respond-to('medium') {
         p {
-            font-family: $headingFont;
-            font-size: 3rem;
-            color: #fff;
+            font-size: 1.3rem;
         }
     }
+    @include respond-to('small') {
+        p {
+            font-size: 3rem;
+        }
+    }
+}
+
+.mascot {
+    background-image: url(../../../assets/pugMascot.png);
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    height: 45vh;
+    width: 70%;
+    margin: 0 auto;
+}
+
+@include respond-to('small') {
     .mascot {
-        background-image: url(../../../assets/pugMascot.png);
-        background-size: contain;
-        background-position: bottom;
-        background-repeat: no-repeat;
-        height: 45vh;
-        width: 70%;
-        margin: 0 auto;
+        display: none;
     }
 }
 
 .leaderBoard {
-    width: 15%;
+    width: 50%;
     color: #fff;
-    position: absolute;
-    right: 0;
-    top: 10%;
     margin: 0 auto;
+    text-align: center;
 
     h2 {
         color: $beige;
         text-transform: uppercase;
+        margin-bottom: 15px;
+        border-bottom: solid 2px;
+        display: inline-block;
+        letter-spacing: 5px;
     }
 
     p {
@@ -120,4 +154,13 @@
 
 .match .card__front {
     transform: rotateY(0deg);
+}
+
+.swal2-modal .swal2-content a {
+    display: block;
+    margin: 15px auto;
+
+    .fa-circle {
+        color: #4099FF;
+    }
 }
