@@ -41,17 +41,6 @@
 .score {
     margin: 20px 0;
     padding: 30px 0;
-<<<<<<< HEAD
-
-    @include respond-to('small'){
-        &{
-            margin: 0 25px;
-            padding: 30px 0;
-            float: left;
-        }
-    }
-
-=======
     
     @include respond-to('small') {
         & {
@@ -59,7 +48,7 @@
             margin: 0 30px;
         }
     } 
->>>>>>> ac3aa7ceffd54df8b74defc33d94ca216e2a3626
+
     h3 {
         text-transform: uppercase;
         letter-spacing: 2px;
