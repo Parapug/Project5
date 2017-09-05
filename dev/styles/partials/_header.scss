@@ -5,6 +5,21 @@
         margin: 30px;
         text-shadow: 1px 1px 1px grey;
     }
+    @include respond-to('medium') {
+        h1 {
+            font-size: 6rem;
+            text-align: center;
+        }
+    }
+    @include respond-to('small') {
+        h1 {
+            font-size: 5rem;
+            text-align: center;
+        }
+        .startBtn a {
+            font-size: 1.2rem;
+        }
+    }
 }
 
 input[type="text"] {
@@ -17,13 +32,41 @@ input[type="text"] {
     padding: 15px;
     outline: none;
     border: none;
-    display: block; 
+    display: block;
 }
 
-.pugImg {
+@include respond-to('medium') {
+    input[type="text"] {
+        width: 300px;
+        margin: 0 auto;
+    }
+}
+
+.pugImg .pug {
     position: absolute;
-    bottom: -34px;
+    top: calc(100vh - 500px);
     right: 0;
+}
+
+.pugImg .pugPair {
+    display: none;
+}
+
+@include respond-to('medium') {
+    .pugImg .pug {
+        display: none;
+    }
+
+    .pugImg .pugPair {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@include respond-to('small') {
+    .pugImg .pugPair {
+        width: 90%
+    }
 }
 
 .bounceInUp {
@@ -32,6 +75,13 @@ input[type="text"] {
 
 .startBtn {
     margin: 50px 0 0 30px;
+    display: block;
+}
+
+@include respond-to('medium') {
+    .startBtn {
+        margin: 50px auto;
+    }
 }
 
 .startBtn a {
