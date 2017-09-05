@@ -59,7 +59,7 @@ cardGame.displayLead = () => {
 //AJAX call to Petfinder API
 cardGame.getContent = () => {
     $.ajax({
-        url: `http://api.petfinder.com/pet.find`,
+        url: `https://api.petfinder.com/pet.find`,
         method: 'GET',
         dataType: 'jsonp',
         data: {
