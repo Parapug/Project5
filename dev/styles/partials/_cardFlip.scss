@@ -26,14 +26,14 @@
 
 .tracker {
     text-align: center;
-    // float: left;
-    width: 2vw;
+    float: left;
+    width: 20vw;
 }
 
 @include respond-to('small') {
     .tracker {
         margin: 0 auto;
-        width: 70%;
+        width: 100%;
     }
 }
 
