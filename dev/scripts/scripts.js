@@ -8,12 +8,8 @@ cardGame.gameStart = false;
 cardGame.previous;
 cardGame.clickAllowed = true;
 cardGame.matches = 0;
-<<<<<<< HEAD
 cardGame.leadBoard = firebase.database().ref();
-=======
-cardGame.leadBoard= firebase.database().ref();
 
->>>>>>> 0c049184e13948520bdb6d757c75d5394a49fb4a
 // User should press 'Start', fadeIn instructions on top with an "x" to close and a button close
 // Loading screen, if needed, while AJAX calls request pics of doges
 // Game board loads with 4x4 layout, cards face down
@@ -43,6 +39,7 @@ cardGame.displayLead = () => {
         let topFive = [];
         let dataArray = scores.val();
         let scoresArray = [];
+        let boardString = '<h2>Leaderboard</h2>';
 
         for (let key in dataArray) {
             scoresArray.push(dataArray[key]);
@@ -53,7 +50,8 @@ cardGame.displayLead = () => {
         })
 
         for (let i = 0; i < 5; i++) {
-            $('.leaderBoard').append(`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}`);
+            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);
+            $('.leaderBoard').html(boardString);
         }
     })
 }
