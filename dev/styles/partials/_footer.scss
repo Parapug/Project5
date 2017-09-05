@@ -4,43 +4,47 @@ footer {
     padding: 20px;
     text-align: center;
     position: relative;
-}
 
-footer, .creators h2, .creators li a, .powerBy a{
-    color: $beige;
-} 
+    .creators h2,
+    .creators li a,
+    .powerBy a {
+        color: $beige;
+    }
 
-.creators h2 {
-    border-bottom: solid 2px;
-    display: inline-block;
-    letter-spacing: 1px;
-    font-weight: 400;
-    text-transform: uppercase;
-}
+    .creators h2 {
+        border-bottom: 2px solid $beige;
+        display: inline-block;
+        letter-spacing: 5px;
+        font-weight: 400;
+        text-transform: uppercase;
+    }
 
-.creators li{
-    float: left;
-    padding: 20px;
-    margin: 20px 0;
-    display: inline-block;
-    width: 42.5%;
-    font-size: 15px;
-}
+    .creators li {
+        padding: 20px;
+        margin: 20px auto;
+        display: inline-block;
+        font-size: 1rem;
+    }
 
-.creators li:first-child{
-    text-align: right;
-}
+    .creators li:nth-child(2) {
+        border-left: 1px solid $beige;
+        border-right: 1px solid $beige;
+    }
 
-.creators li:nth-child(2){
-    width: 15%;
-    border-left: 1px solid;
-    border-right: 1px solid;
-}
+    @include respond-to('medium') {
+        .creators li {
+            display: block;
+            margin: 0 auto;
+            font-size: 1.5rem;
+        }
 
-.creators li:last-child{
-    text-align: left;
-}
 
-.powerBy a {
+        .creators li:nth-child(2) {
+            border: none;
+        }
 
+        .powerBy {
+            clear: both;
+        }
+    }
 }
