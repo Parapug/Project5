@@ -37,6 +37,7 @@ cardGame.displayLead = () => {
         let topFive = [];
         let dataArray = scores.val();
         let scoresArray = [];
+        let boardString = "<h2>Leaderboard</h2>";
 
         for (let key in dataArray) {
             scoresArray.push(dataArray[key]);
@@ -47,7 +48,8 @@ cardGame.displayLead = () => {
         })
 
         for (let i = 0; i < 5; i++) {
-            $('.leaderBoard').append(`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}`);
+            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);
+            $('.leaderBoard').html(boardString);
         }
     })
 }
