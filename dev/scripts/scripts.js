@@ -41,6 +41,7 @@ cardGame.displayLead = () => {
         let scoresArray = [];
         let boardString = '<h2>Leaderboard</h2>';
 
+
         for (let key in dataArray) {
             scoresArray.push(dataArray[key]);
         }
