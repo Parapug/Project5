@@ -1,5 +1,6 @@
 var cardGame = {};
-cardGame.key = '6cc621452cadd6d6f867f4435723803f';
+cardGame.key = 'E4iaH4cgjoYeVbN7mDlNf1WcbMvEG3QM9qpH1UeXXp5Y36rbZs';
+cardGame.secret = "3oWkr1dFy74ASPoo1zQz5uVvQ42n13xdD9Q9XDmk";
 cardGame.dogPics = [];
 cardGame.randPics = [];
 cardGame.timer = 0;
@@ -14,11 +15,11 @@ cardGame.leadBoard = firebase.database().ref();
 // Loading screen, if needed, while AJAX calls request pics of doges
 // Game board loads with 4x4 layout, cards face down
 // Timer starts when a card is flipped
-//      1. On click of a card, it flips and reveals a doge
-//      2. On click of a second card, it also flips and reveals a doge
-//      3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
-//      4. Once the # of matches = 8, then the timer stops and the game is over.
-//      5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
+// 		1. On click of a card, it flips and reveals a doge
+// 		2. On click of a second card, it also flips and reveals a doge
+// 		3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
+// 		4. Once the # of matches = 8, then the timer stops and the game is over.
+// 		5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
 //leaderboard Firebase
 
 cardGame.newLead = (timer, string) => {
@@ -59,46 +60,69 @@ cardGame.displayLead = () => {
 
 //AJAX call to Petfinder API
 cardGame.getContent = () => {
+    const body = {
+        grant_type: 'client_credentials',
+        client_id: cardGame.key,
+        client_secret: cardGame.secret,
+    };
+
     $.ajax({
-        url: `https://api.petfinder.com/pet.find`,
-        method: 'GET',
-        dataType: 'jsonp',
-        data: {
-            key: cardGame.key,
-            location: 'Toronto, On',
-            animal: 'dog',
-            format: 'json',
-            callback: "?",
-            breed: "Pug"
-        }
-    }).then(function(res) {
-        //pick random photos from the API
-        cardGame.pickRandPhotos(res);
+        url: `https://api.petfinder.com/v2/oauth2/token`,
+        method: 'POST',
+        dataType: 'json',
+        data: body
+    }).done(function (oauthRes) {
+        $.ajax({
+            url: `https://api.petfinder.com/v2/animals`,
+            method: 'GET',
+
+            data: {
+                type: 'dog',
+                breed: 'pug',
+                sort: 'random',
+                limit: 8
+            },
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", "Bearer " + oauthRes.access_token)
+            }
+        }).done(function (res) {
+            //pick random photos from the API
+            cardGame.pickRandPhotos(res);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("Petfinder fail");
+            console.error({
+                jqXHR,
+                textStatus,
+                errorThrown
+            })
+        });
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        console.error("OAuth fail");
+        console.error({
+            jqXHR,
+            textStatus,
+            errorThrown
+        })
     });
 }
 
 //function to grab 8 random photos from API for the card faces
 cardGame.pickRandPhotos = (res) => {
-    let petData = res.petfinder.pets.pet;
+    let petData = res.animals;
 
     //save all pet photos
     petData.forEach((dog) => {
-        if (dog.media.photos !== undefined) {
-            cardGame.dogPics.push(dog.media.photos.photo[2]['$t']);
-        }
+        let randomPic = Math.floor(Math.random() * dog.photos.length);
+        cardGame.dogPics.push(dog.photos[randomPic].full);
     });
 
     //pick 8 random ones
-    for (let i = 0; i < 8; i++) {
-        let randomPick = Math.floor(Math.random() * cardGame.dogPics.length);
-        cardGame.randPics.forEach((pic) => {
-            while (cardGame.dogPics[randomPick] === pic) {
-                randomPick = Math.floor(Math.random() * cardGame.dogPics.length);
-            }
-        });
+    while (cardGame.dogPics.length > 0) {
+        let randomPick = Math.floor(Math.random() * cardGame.dogPics.length),
+            picked = cardGame.dogPics.splice(randomPick, 1);
         //double up for matching (8 photos = 16 cards)
-        cardGame.randPics.push(cardGame.dogPics[randomPick]);
-        cardGame.randPics.push(cardGame.dogPics[randomPick]);
+        cardGame.randPics.push(picked);
+        cardGame.randPics.push(picked);
     }
     //append the dog pics to the cards on the page
     cardGame.displayContent();
@@ -127,7 +151,7 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
-        $('.card').on('click', function(e) {
+        $('.card').on('click', function (e) {
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
@@ -163,13 +187,11 @@ cardGame.gameFX = (element, c, counter) => {
 
 //calculate and display timer on page
 cardGame.showTimer = () => {
-    let timeString = ""
-    let secondsString = "";
-    let minutesString = "";
-    let subSecondsString = "";
-    let minutes;
-    let seconds;
-    let subSeconds;
+    let timeString = "",
+        secondsString = "",
+        minutesString = "",
+        subSecondsString = "",
+        minutes, seconds, subSeconds;
     cardGame.gameStart = false;
 
     if (cardGame.matches < 8) {
