@@ -14,11 +14,11 @@ cardGame.leadBoard = firebase.database().ref();
 // Loading screen, if needed, while AJAX calls request pics of doges
 // Game board loads with 4x4 layout, cards face down
 // Timer starts when a card is flipped
-// 		1. On click of a card, it flips and reveals a doge
-// 		2. On click of a second card, it also flips and reveals a doge
-// 		3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
-// 		4. Once the # of matches = 8, then the timer stops and the game is over.
-// 		5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
+//      1. On click of a card, it flips and reveals a doge
+//      2. On click of a second card, it also flips and reveals a doge
+//      3. Compare the pictures (aka the value or id) and if equal, then match = true, else flip them back over. If match = true, cards stay flipped. Counter for # of matches increase by 1.
+//      4. Once the # of matches = 8, then the timer stops and the game is over.
+//      5. Popup box congratulating the player with their time. Restart button if the user wishes to play again.
 //leaderboard Firebase
 
 cardGame.newLead = (timer, string) => {
@@ -51,7 +51,7 @@ cardGame.displayLead = () => {
         })
 
         for (let i = 0; i < 5; i++) {
-            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);            
+            boardString += (`<p>${scoresArray[i].name} : ${scoresArray[i].timeString}</p>`);
         }
         $('.leaderBoard').html(boardString);
     })
@@ -71,7 +71,7 @@ cardGame.getContent = () => {
             callback: "?",
             breed: "Pug"
         }
-    }).then(function (res) {
+    }).then(function(res) {
         //pick random photos from the API
         cardGame.pickRandPhotos(res);
     });
@@ -83,7 +83,9 @@ cardGame.pickRandPhotos = (res) => {
 
     //save all pet photos
     petData.forEach((dog) => {
-        cardGame.dogPics.push(dog.media.photos.photo[2]['$t']);
+        if (dog.media.photos !== undefined) {
+            cardGame.dogPics.push(dog.media.photos.photo[2]['$t']);
+        }
     });
 
     //pick 8 random ones
@@ -125,7 +127,7 @@ cardGame.matchGame = () => {
     let current = '';
     if (cardGame.clickAllowed) {
         cardGame.gameStart = true;
-        $('.card').on('click', function (e) {
+        $('.card').on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             cardGame.counter++;
