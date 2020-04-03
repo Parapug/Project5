@@ -17,14 +17,18 @@ gulp.task("styles", () => {
 		.pipe(sass().on("error", sass.logError))
 		.pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
 		.pipe(concat("style.css"))
-		.pipe(cleanCSS({debug: true}, function(details) {
-		      console.log(details.name + ': ' + details.stats.originalSize);
-		      console.log(details.name + ': ' + details.stats.minifiedSize);
-		    }))
+		.pipe(cleanCSS({
+			debug: true
+		}, function (details) {
+			console.log(details.name + ': ' + details.stats.originalSize);
+			console.log(details.name + ': ' + details.stats.minifiedSize);
+		}))
 		.pipe(sourcemaps.write())
 		.pipe(plumber.stop())
 		.pipe(gulp.dest("./public/styles"))
-		.pipe(reload({stream: true}));
+		.pipe(reload({
+			stream: true
+		}));
 });
 
 //task to copy over sweet alert css
@@ -38,26 +42,28 @@ gulp.task("scripts", () => {
 	return gulp.src("./dev/scripts/**/*.js")
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
-			.pipe(babel({
-				presets: ["es2015"]
-			}))
+		.pipe(babel({
+			presets: ["es2015"]
+		}))
 		.pipe(sourcemaps.write())
 		.pipe(plumber.stop())
 		.pipe(gulp.dest("./public/scripts"))
-		.pipe(reload({stream: true}));
+		.pipe(reload({
+			stream: true
+		}));
 });
 
 //task to watch other tasks
 gulp.task('watch', () => {
-  gulp.watch('./dev/styles/**/*.scss', ['styles']);
-  gulp.watch('./dev/scripts/*.js', ['scripts']);
-  gulp.watch('*.html', reload);
+	gulp.watch('./dev/styles/**/*.scss', ['styles']);
+	gulp.watch('./dev/scripts/*.js', ['scripts']);
+	gulp.watch('*.html', reload);
 });
 
 gulp.task('browser-sync', () => {
-  browserSync.init({
-    server: '.'  
-  })
+	browserSync.init({
+		server: '.'
+	})
 });
 
-gulp.task('default', ['browser-sync','styles', 'scripts', 'watch']);
+gulp.task('default', gulp.series('browser-sync', 'styles', 'scripts', 'watch'));
